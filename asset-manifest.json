@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Isabella-Slaby/billing-app.github.io.git/static/css/main.6164e577.css",
+    "main.js": "/Isabella-Slaby/billing-app.github.io.git/static/js/main.cbff1390.js",
+    "static/js/453.181135dd.chunk.js": "/Isabella-Slaby/billing-app.github.io.git/static/js/453.181135dd.chunk.js",
+    "index.html": "/Isabella-Slaby/billing-app.github.io.git/index.html",
+    "main.6164e577.css.map": "/Isabella-Slaby/billing-app.github.io.git/static/css/main.6164e577.css.map",
+    "main.cbff1390.js.map": "/Isabella-Slaby/billing-app.github.io.git/static/js/main.cbff1390.js.map",
+    "453.181135dd.chunk.js.map": "/Isabella-Slaby/billing-app.github.io.git/static/js/453.181135dd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6164e577.css",
+    "static/js/main.cbff1390.js"
+  ]
+}
