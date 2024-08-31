@@ -9,20 +9,69 @@
 /* Import Tailwind's utility styles */
 @tailwind utilities;
 
-
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
-
 
 body {
   margin: 0;
-  /* Font-Family -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',  */
   font-family: 'Raleway';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #e0f7ff 0%, #b0d8ff 100%); /* Light blue gradient */
+  color: #333;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.fade-in-out {
+  transition: opacity 300ms ease-in-out;
+}
+
+.criteria-list {
+    list-style-type: none; /* Remove bullets */
+    padding-left: 0; /* Remove default padding */
+}
+
+.criteria-item {
+    display: flex;
+    align-items: center;
+}
+
+.criteria-item input {
+    margin-right: 10px;
+}
+
+/* Custom styles for header and notice box */
+header {
+  background-color: #00274d; /* Dark blue background */
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.header-notice {
+  background-color: #004080; /* Darker blue for the notice box */
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+/* Divider line for separating groups in ProblemComplexity */
+.criteria-divider {
+    border-top: 1px solid #cccccc; /* Thin, light grey line */
+    margin: 8px 0; /* Spacing around the line */
+}
+
