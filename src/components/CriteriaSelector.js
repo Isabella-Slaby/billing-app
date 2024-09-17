@@ -31,33 +31,27 @@ const CriteriaSelector = ({
         updateComplexityLevel(newCriteriaList);
     };
 
+   // Reusable function to generate complexity buttons
+    const renderComplexityButton = (level, label) => (
+        <button
+            type="button"
+            className={`relative group w-full p-2 rounded-md border ${complexityLevel === level ? 'bg-christianaGreen text-white' : 'bg-gray-200 text-gray-700'} hover:bg-christianaTeal hover:text-white transition-colors`}
+            onClick={() => setComplexityLevel(level)}
+        >
+            {label}
+        </button>
+    );
+
     return (
         <div>
             <label className="block text-christianaBlue mb-2">{title}</label>
             <div className="flex space-x-2 relative">
-                <button
-                    type="button"
-                    className={`relative group w-full p-2 rounded-md border ${complexityLevel === 'low' ? 'bg-christianaGreen text-white' : 'bg-gray-200 text-gray-700'} hover:bg-christianaTeal hover:text-white transition-colors`}
-                    onClick={() => setComplexityLevel('low')}
-                >
-                    Low
-                </button>
-                <button
-                    type="button"
-                    className={`relative group w-full p-2 rounded-md border ${complexityLevel === 'moderate' ? 'bg-christianaGreen text-white' : 'bg-gray-200 text-gray-700'} hover:bg-christianaTeal hover:text-white transition-colors`}
-                    onClick={() => setComplexityLevel('moderate')}
-                >
-                    Moderate
-                </button>
-                <button
-                    type="button"
-                    className={`relative group w-full p-2 rounded-md border ${complexityLevel === 'high' ? 'bg-christianaGreen text-white' : 'bg-gray-200 text-gray-700'} hover:bg-christianaTeal hover:text-white transition-colors`}
-                    onClick={() => setComplexityLevel('high')}
-                >
-                    High
-                </button>
+                {renderComplexityButton('low', 'Low')}
+                {renderComplexityButton('moderate', 'Moderate')}
+                {renderComplexityButton('high', 'High')}
             </div>
-            {showCriteria && (
+
+            {showCriteria ? (
                 <div className="mt-4 p-4 border border-gray-300 rounded-md bg-gray-50">
                     <div className="flex justify-between">
                         <p className="font-semibold text-gray-700">Consider the following criteria:</p>
@@ -84,8 +78,7 @@ const CriteriaSelector = ({
                         ))}
                     </ul>
                 </div>
-            )}
-            {!showCriteria && (
+            ) : (
                 <button 
                     className="text-blue-600 text-sm underline mt-2"
                     onClick={() => setShowCriteria(true)}

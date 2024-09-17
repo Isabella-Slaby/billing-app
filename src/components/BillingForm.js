@@ -3,33 +3,36 @@ import ResultDisplay from './ResultDisplay';
 import CriteriaSelector from './CriteriaSelector';
 
 const BillingForm = () => {
-    const [problemComplexity, setProblemComplexity] = useState('');
-    const [dataComplexity, setDataComplexity] = useState('');
-    const [riskLevel, setRiskLevel] = useState('');
+    // Group related state into objects for better management
+    const [complexities, setComplexities] = useState({
+        problemComplexity: '',
+        dataComplexity: '',
+        riskLevel: ''
+    });
+    
+    const [criteria, setCriteria] = useState({
+        problemCriteria: [],
+        dataCriteria: [],
+        riskCriteria: []
+    });
+
     const [billingLevel, setBillingLevel] = useState(null);
+    const [showCriteria, setShowCriteria] = useState({
+        showProblemCriteria: true,
+        showDataCriteria: true,
+        showRiskCriteria: true
+    });
 
-    const [problemCriteria, setProblemCriteria] = useState([]);
-    const [dataCriteria, setDataCriteria] = useState([]);
-    const [riskCriteria, setRiskCriteria] = useState([]);
-
-    const [showProblemCriteria, setShowProblemCriteria] = useState(true);
-    const [showDataCriteria, setShowDataCriteria] = useState(true);
-    const [showRiskCriteria, setShowRiskCriteria] = useState(true);
-
+    // Simplify the calculation logic using loops
     const calculateBillingLevel = () => {
+        const complexityLevels = [complexities.problemComplexity, complexities.dataComplexity, complexities.riskLevel];
         let lowCount = 0, moderateCount = 0, highCount = 0;
 
-        if (problemComplexity === 'low') lowCount++;
-        if (problemComplexity === 'moderate') moderateCount++;
-        if (problemComplexity === 'high') highCount++;
-
-        if (dataComplexity === 'low') lowCount++;
-        if (dataComplexity === 'moderate') moderateCount++;
-        if (dataComplexity === 'high') highCount++;
-
-        if (riskLevel === 'low') lowCount++;
-        if (riskLevel === 'moderate') moderateCount++;
-        if (riskLevel === 'high') highCount++;
+        complexityLevels.forEach(level => {
+            if (level === 'low') lowCount++;
+            if (level === 'moderate') moderateCount++;
+            if (level === 'high') highCount++;
+        });
 
         if (highCount >= 2) {
             setBillingLevel('High Complexity');
@@ -42,24 +45,31 @@ const BillingForm = () => {
         }
     };
 
+    // Use useEffect to calculate when necessary
     useEffect(() => {
+        const { problemComplexity, dataComplexity, riskLevel } = complexities;
         if (problemComplexity && dataComplexity && riskLevel) {
             calculateBillingLevel();
         } else {
             setBillingLevel(null);
         }
-    }, [problemComplexity, dataComplexity, riskLevel]);
+    }, [complexities]);
+
+    // Handle updates to complexity levels
+    const updateComplexity = (type, value) => {
+        setComplexities(prevState => ({ ...prevState, [type]: value }));
+    };
 
     return (
         <div className="space-y-6">
             <CriteriaSelector 
                 title="Complexity of Problems"
-                criteria={problemCriteria}
-                setCriteria={setProblemCriteria}
-                complexityLevel={problemComplexity}
-                setComplexityLevel={setProblemComplexity}
-                showCriteria={showProblemCriteria}
-                setShowCriteria={setShowProblemCriteria}
+                criteria={criteria.problemCriteria}
+                setCriteria={(newCriteria) => setCriteria(prev => ({ ...prev, problemCriteria: newCriteria }))}
+                complexityLevel={complexities.problemComplexity}
+                setComplexityLevel={(level) => updateComplexity('problemComplexity', level)}
+                showCriteria={showCriteria.showProblemCriteria}
+                setShowCriteria={(show) => setShowCriteria(prev => ({ ...prev, showProblemCriteria: show }))}
                 criteriaOptions={[
                     { label: 'Is there chronic or acute injury that causes threat to life or bodily function?', level: 'high' },
                     { label: 'Are there 1 or more chronic illnesses with severe exacerbation?', level: 'high' },
@@ -74,12 +84,12 @@ const BillingForm = () => {
             />
             <CriteriaSelector 
                 title="Data Complexity"
-                criteria={dataCriteria}
-                setCriteria={setDataCriteria}
-                complexityLevel={dataComplexity}
-                setComplexityLevel={setDataComplexity}
-                showCriteria={showDataCriteria}
-                setShowCriteria={setShowDataCriteria}
+                criteria={criteria.dataCriteria}
+                setCriteria={(newCriteria) => setCriteria(prev => ({ ...prev, dataCriteria: newCriteria }))}
+                complexityLevel={complexities.dataComplexity}
+                setComplexityLevel={(level) => updateComplexity('dataComplexity', level)}
+                showCriteria={showCriteria.showDataCriteria}
+                setShowCriteria={(show) => setShowCriteria(prev => ({ ...prev, showDataCriteria: show }))}
                 criteriaOptions={[
                     { label: 'Extensive data: Review of prior external notes, each unique source, independent interpretation of complex tests', level: 'high' },
                     { label: 'Moderate data: Review of prior external notes, each unique source, independent interpretation of tests performed by another provider', level: 'moderate' },
@@ -88,15 +98,15 @@ const BillingForm = () => {
             />
             <CriteriaSelector 
                 title="Risk Level"
-                criteria={riskCriteria}
-                setCriteria={setRiskCriteria}
-                complexityLevel={riskLevel}
-                setComplexityLevel={setRiskLevel}
-                showCriteria={showRiskCriteria}
-                setShowCriteria={setShowRiskCriteria}
+                criteria={criteria.riskCriteria}
+                setCriteria={(newCriteria) => setCriteria(prev => ({ ...prev, riskCriteria: newCriteria }))}
+                complexityLevel={complexities.riskLevel}
+                setComplexityLevel={(level) => updateComplexity('riskLevel', level)}
+                showCriteria={showCriteria.showRiskCriteria}
+                setShowCriteria={(show) => setShowCriteria(prev => ({ ...prev, showRiskCriteria: show }))}
                 criteriaOptions={[
-                    { label: 'High risk: Decision regarding emergency major surgery, drug therapy requiring intensive monitoring', level: 'high' },
-                    { label: 'Moderate risk: Prescription drug management, decision regarding minor surgery', level: 'moderate' },
+                    { label: 'High risk: Parental controlled substances, Decision re: emergency major surgery, decision re: elective major surgery w/ pt or procedure risk factors, Decision for DNR or de-escalate care due to poor prognosis, drug therapy req intensive monitoring', level: 'high' },
+                    { label: 'Moderate risk of morbidity from additional testing or treatment: Rx management, decision re: minor surgery w identified risk factors, Decision re: elective major surgery wo identified pt or procedure risk factors, Dx tx sig limited by SDOH', level: 'moderate' },
                     { label: 'Low risk: Low risk of morbidity from additional diagnostic testing or treatment', level: 'low' }
                 ]}
             />

@@ -2,9 +2,12 @@ import React from 'react';
 
 function Header() {
   return (
-    <header className="bg-christianaBlue p-4 text-white">
-      <h1 className="text-4xl font-bold">Welcome to the Billing App</h1>
-    </header>
+  <header className="text-center">
+    <h1 className="text-white">Hospitalist Billing Assistant</h1>
+    <div className="header-notice">
+        This is under construction. This is for billing for complexity for rounding hospitalists. Not time-based. The developer cannot guarantee the accuracy of this tool.
+    </div>
+  </header>
   );
 }
 
