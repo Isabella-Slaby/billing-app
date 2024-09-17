@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/billing-app.github.io/static/css/main.9460dec5.css",
-    "main.js": "/billing-app.github.io/static/js/main.0ae88373.js",
+    "main.css": "/billing-app.github.io/static/css/main.baa66aac.css",
+    "main.js": "/billing-app.github.io/static/js/main.90911a44.js",
     "index.html": "/billing-app.github.io/index.html",
-    "main.9460dec5.css.map": "/billing-app.github.io/static/css/main.9460dec5.css.map",
-    "main.0ae88373.js.map": "/billing-app.github.io/static/js/main.0ae88373.js.map"
+    "main.baa66aac.css.map": "/billing-app.github.io/static/css/main.baa66aac.css.map",
+    "main.90911a44.js.map": "/billing-app.github.io/static/js/main.90911a44.js.map"
   },
   "entrypoints": [
-    "static/css/main.9460dec5.css",
-    "static/js/main.0ae88373.js"
+    "static/css/main.baa66aac.css",
+    "static/js/main.90911a44.js"
   ]
 }
